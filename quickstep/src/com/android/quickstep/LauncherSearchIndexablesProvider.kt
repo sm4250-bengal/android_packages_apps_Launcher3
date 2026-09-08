@@ -33,7 +33,7 @@ class LauncherSearchIndexablesProvider : SearchIndexablesProvider() {
 
     override fun onCreate(): Boolean = true
 
-    override fun queryXmlResources(strings: Array<String>): Cursor {
+    override fun queryXmlResources(strings: Array<String>?): Cursor {
         val cursor = MatrixCursor(SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS)
         val context = context ?: return cursor
         val settingsActivity =
@@ -67,10 +67,10 @@ class LauncherSearchIndexablesProvider : SearchIndexablesProvider() {
         return InvariantDeviceProfile.INSTANCE.get(context).deviceType == TYPE_TABLET
     }
 
-    override fun queryRawData(projection: Array<String>) =
+    override fun queryRawData(projection: Array<String>?) =
         MatrixCursor(SearchIndexablesContract.INDEXABLES_RAW_COLUMNS)
 
-    override fun queryNonIndexableKeys(projection: Array<String>): Cursor {
+    override fun queryNonIndexableKeys(projection: Array<String>?): Cursor {
         val cursor = MatrixCursor(SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS)
         if (isDeviceTablet()) {
             cursor.addRow(arrayOf(FIXED_LANDSCAPE_KEY))
